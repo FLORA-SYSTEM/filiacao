@@ -8,14 +8,18 @@
 :root[data-theme="dark"]{--bg:#171213;--sf:#241c1d;--tx:#f3ecec;--mu:#a89b9b;--bd:#3a2e2f;--rd:#d6465a}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#7a0f1f;color:#fff;padding:16px;text-align:center;border-bottom:4px solid var(--gd)}
-header h1{margin:0;font-size:1.1rem}header small{opacity:.85}
+header{background:linear-gradient(135deg,#4d0812,#7a0f1f 60%,#9a1b2e);color:#fff;padding:18px 16px;display:flex;align-items:center;justify-content:center;gap:14px;text-align:left;border-bottom:4px solid var(--gd);box-shadow:0 2px 12px rgba(0,0,0,.25)}
+header h1{margin:0;font:700 1.6rem Georgia,serif;letter-spacing:3px;color:#f0d36a}header small{opacity:.9;font-size:.78rem}
+footer{text-align:center;color:var(--mu);font-size:.78rem;padding:10px 16px 28px}
+input:focus,select:focus{outline:2px solid var(--rd);outline-offset:1px}
+h3{font:700 1.05rem Georgia,serif;color:var(--rd);letter-spacing:.5px;border-bottom:1px solid var(--bd);padding-bottom:8px}
+th{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--mu)}tbody tr:hover{background:var(--bg)}
 main{max-width:900px;margin:0 auto;padding:16px}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+.card{background:var(--sf);border:1px solid var(--bd);border-top:3px solid var(--gd);border-radius:12px;padding:22px;margin-bottom:20px;box-shadow:0 4px 18px rgba(60,20,20,.08)}
 label{display:block;font-size:.85rem;color:var(--mu);margin:10px 0 3px}
 input,select{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.row{grid-template-columns:1fr}}
-button{background:var(--rd);color:#fff;border:0;border-radius:8px;padding:11px 16px;font:inherit;font-weight:600;cursor:pointer;margin:6px 6px 0 0}
+button{background:linear-gradient(135deg,#7a0f1f,#9a1b2e);color:#fff;border:0;border-radius:8px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer;margin:10px 8px 0 0;box-shadow:0 2px 6px rgba(122,15,31,.3);transition:transform .15s,box-shadow .15s}button:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(122,15,31,.4)}
 button.sec{background:transparent;color:var(--rd);border:1px solid var(--rd)}
 .hint{font-size:.8rem;color:var(--mu)}
 canvas{max-width:100%;height:auto;border-radius:10px;border:1px solid var(--bd)}
@@ -25,10 +29,10 @@ table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;
 .doc{background:#fff;color:#111;border:1px solid #ccc;padding:36px 40px;margin:0 auto 20px;max-width:800px;font:14px/1.55 Georgia,serif;text-align:justify}
 .doc h2{text-align:center;font-family:Arial,sans-serif;margin:6px 0}.doc .t{text-align:center;font-family:Arial,sans-serif;font-weight:700}
 .doc .sig{display:flex;gap:30px;margin-top:70px;text-align:center;font:700 12px Arial}.doc .sig div{flex:1;border-top:2px solid #111;padding-top:4px}
-.cert{border:10px double #7a0f1f;text-align:center}.cert p{text-align:justify;font-size:13px}.cert h1{font:800 34px Arial;color:#7a0f1f;margin:4px 0}
+.cert{border:3px solid #c9a227;outline:8px double #7a0f1f;outline-offset:-18px;padding:48px 52px;background:radial-gradient(circle at 50% 40%,#fffdf7,#f6ecd2);text-align:center}.cert p{text-align:justify;font-size:13px}.cert h1{font:800 34px Arial;color:#7a0f1f;margin:4px 0}
 @media print{header,.card,.noprint{display:none!important}body{background:#fff}.doc{border:0;page-break-after:always;margin:0 auto}#docs{display:block!important}}
 </style></head><body>
-<header><h1>COMIEP – Convenção de Ministros e Igrejas Evangélicas do Pará</h1><small>CNPJ 51.579.053.0001/40 · Filiação de ministros</small></header>
+<header><span id="lg"></span><div><h1>COMIEP</h1><small>Convenção de Ministros e Igrejas Evangélicas do Pará<br>CNPJ 51.579.053.0001/40 · Sistema de Filiação</small></div></header>
 <main>
 <section class="card"><h3 style="margin-top:0">Cadastro de filiação</h3>
 <label>Nome completo</label><input id="nome">
@@ -48,11 +52,13 @@ table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;
 <button id="pr" class="sec">Imprimir / Salvar documentos em PDF</button></section>
 
 <section class="card"><h3 style="margin-top:0">Filiados cadastrados</h3><div class="scroll"><table><thead><tr><th>Reg.</th><th>Nome</th><th>Cargo</th><th>Igreja</th><th>Válido</th><th></th></tr></thead><tbody id="lista"><tr><td colspan="6" class="hint">Nenhum cadastro ainda.</td></tr></tbody></table></div><p class="hint" id="dbst"></p></section>
-</main>
+</main><footer>COMIEP · Rua Cândido de Souza, nº 56 – Águas Brancas, Ananindeua/PA · (91) 98228-7990</footer>
 <div id="docs"></div>
 <script>
 const CFG={presidente:"Andrew",secretaria:"Thawana",fone:"(91) 98228-7990",anosValidade:2,dia:10,mes:12,primeiroRegistro:281};
 const $=id=>document.getElementById(id);
+const CREST='<svg viewBox="0 0 100 110" width="58" height="64"><path d="M50 4 94 18v38c0 28-20 42-44 50C26 98 6 84 6 56V18z" fill="#7a0f1f" stroke="#c9a227" stroke-width="4"/><path d="M26 58q24-12 48 0v10q-24-10-48 0z" fill="#fff"/><path d="M50 28c-8 4-14 10-12 18 6-2 10-6 12-10 2 4 6 8 12 10 2-8-4-14-12-18z" fill="#fff"/><rect x="12" y="76" width="76" height="15" rx="3" fill="#c9a227"/><text x="50" y="87.5" font-size="10" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">COMIEP</text></svg>';
+$("lg").innerHTML=CREST;
 let db=null,col=null,membros=[],atual=null,fotoData="";
 const fmt=d=>d.split("-").reverse().join("/");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -76,11 +82,17 @@ mostrar(m)};
 
 function mostrar(m){atual=m;$("out").style.display="block";desenhar(m);docs(m)}
 
-function desenhar(m){const c=$("cv"),x=c.getContext("2d");x.fillStyle="#1f2a30";x.fillRect(0,0,600,900);
-x.fillStyle="#7a0f1f";x.fillRect(0,0,600,70);x.fillStyle="#fff";x.font="bold 26px Arial";x.textAlign="center";x.fillText("COMIEP",300,34);x.font="13px Arial";x.fillText("Convenção de Ministros e Igrejas Evangélicas do Pará",300,56);
-const lin=()=>{x.textAlign="left";x.fillStyle="#e8edf0";x.font="22px Arial";let y=640;
-[["Registro",m.registro],["Nome",m.nome],["Cargo",m.cargo],["Igreja",m.igreja],["Consagração",fmt(m.consagracao)],["Válido",m.validade]].forEach(([k,v])=>{x.fillText(k+": "+v,30,y,540);y+=40})};
-if(m.foto){const im=new Image();im.onload=()=>{const w=540,h=Math.min(520,w*im.height/im.width);x.drawImage(im,30,90,w,h);lin()};im.src=m.foto}else{x.fillStyle="#34444c";x.fillRect(30,90,540,520);lin()}}
+function desenhar(m){const c=$("cv"),x=c.getContext("2d"),G="#e6c04a";
+const g=x.createLinearGradient(0,0,0,900);g.addColorStop(0,"#5a0a16");g.addColorStop(1,"#25050a");x.fillStyle=g;x.fillRect(0,0,600,900);
+x.strokeStyle="#c9a227";x.lineWidth=4;x.strokeRect(14,14,572,872);x.lineWidth=1;x.strokeRect(24,24,552,852);
+x.textAlign="center";x.fillStyle=G;x.font="bold 38px Georgia";x.fillText("COMIEP",300,80);x.fillStyle="#f3e9e9";x.font="12px Arial";x.fillText("CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ",300,102);x.fillText("CNPJ 51.579.053.0001/40",300,120);
+x.fillStyle=G;x.font="bold 13px Arial";x.fillText("CREDENCIAL MINISTERIAL  ·  Nº "+m.registro,300,146);
+const txt=()=>{x.textAlign="center";let fs=30,t=m.nome;x.font="bold "+fs+"px Georgia";while(x.measureText(t).width>510&&fs>14){fs--;x.font="bold "+fs+"px Georgia"}x.fillStyle="#fff";x.fillText(t,300,545);
+x.fillStyle=G;x.font="bold 22px Georgia";x.fillText(m.cargo.toUpperCase(),300,578);x.strokeStyle="#c9a227";x.lineWidth=1;x.beginPath();x.moveTo(150,598);x.lineTo(450,598);x.stroke();
+x.textAlign="left";let y=640;[["IGREJA",m.igreja],["CONSAGRAÇÃO",fmt(m.consagracao)],["VÁLIDO ATÉ",m.validade]].forEach(([k,v])=>{x.fillStyle=G;x.font="bold 12px Arial";x.fillText(k,50,y);x.fillStyle="#fff";x.font="21px Arial";x.fillText(v,50,y+26,500);y+=68});
+x.textAlign="center";x.fillStyle="#c9b6b6";x.font="11px Arial";x.fillText("Conferir autenticidade junto à COMIEP · "+CFG.fone,300,858)};
+const fx=150,fy=164,fw=300,fh=340;x.fillStyle="#3a0a12";x.fillRect(fx,fy,fw,fh);
+if(m.foto){const im=new Image();im.onload=()=>{const s=Math.max(fw/im.width,fh/im.height),w=im.width*s,h=im.height*s;x.save();x.beginPath();x.rect(fx,fy,fw,fh);x.clip();x.drawImage(im,fx+(fw-w)/2,fy+(fh-h)/4,w,h);x.restore();x.strokeStyle="#c9a227";x.lineWidth=3;x.strokeRect(fx,fy,fw,fh);txt()};im.src=m.foto}else{x.strokeStyle="#c9a227";x.lineWidth=3;x.strokeRect(fx,fy,fw,fh);txt()}}
 
 $("png").onclick=async()=>{const b=await new Promise(r=>$("cv").toBlob(r,"image/png"));const n="carteirinha-"+atual.registro+".png";
 try{const d=await claude.use("downloads");if(d)return await d.save({filename:n,data:b})}catch(e){}
@@ -97,7 +109,7 @@ const dt=`${hoje.getDate()} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()
 if(m.cargo!=="Pastor Presidente"){d.innerHTML="";$("pr").style.display="none";return}
 $("pr").style.display="";const N=esc(m.nome).toUpperCase(),I=esc(m.igreja).toUpperCase(),E=esc(m.endereco).toUpperCase(),C=esc(m.cidade);
 const cultos=m.cultos.split(";").map(s=>`<li>${esc(s.trim())}</li>`).join("");
-d.innerHTML=`<div class="doc"><div class="t">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ<br>CNPJ: 51.579.053.0001/40</div><hr>
+d.innerHTML=`<div class="doc"><div style="text-align:center">${CREST}</div><div class="t">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ<br>CNPJ: 51.579.053.0001/40</div><hr>
 <h2>TERMO DE FILIAÇÃO ECLESIÁSTICA</h2><div class="t" style="font-size:12px">À CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO ESTADO DO PARÁ – COMIEP</div><br>
 <p>Pelo presente instrumento, eu, <b>Pr.(a) ${N}</b>, na qualidade de Pastor(a) Presidente da <u>${I}</u>, ${E}, ${C}, venho, por livre e espontânea vontade, requerer a filiação desta Igreja à Convenção de Ministros e Igrejas Evangélicas do Estado do Pará – <b>COMIEP</b>, reconhecendo-a como sua Convenção Eclesiástica.</p>
 <p>Declaro que esta Igreja concorda integralmente com os princípios bíblicos, doutrinários, éticos e administrativos estabelecidos no Estatuto Social, Regimento Interno e demais normas da <b>COMIEP</b>, comprometendo-se a observá-los e cumpri-los fielmente no exercício de suas atividades ministeriais.</p>
@@ -107,7 +119,7 @@ d.innerHTML=`<div class="doc"><div class="t">CONVENÇÃO DE MINISTROS E IGREJAS 
 <p>Por ser a expressão da verdade, firmo o presente Termo de Filiação Eclesiástica.</p><p style="text-align:right">${C}, ${dt}.</p>
 <div class="sig"><div>PRESIDENTE - COMIEP</div><div>PRESIDENTE - IGREJA</div><div>SECRETÁRIO (A)</div></div>
 <p class="t" style="font-size:11px;margin-top:30px">RUA CÂNDIDA DE SOUZA Nº 56 – ÁGUAS BRANCAS, ANANINDEUA – PA</p></div>
-<div class="doc cert"><div class="t">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ<br><span style="font-weight:400;font-size:12px">Rua Cândido de Souza, nº 56 – Águas Brancas, Ananindeua/PA · CNPJ: 51.579.053.0001/40 · Tel.: ${CFG.fone}</span></div>
+<div class="doc cert"><div>${CREST}</div><div class="t">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ<br><span style="font-weight:400;font-size:12px">Rua Cândido de Souza, nº 56 – Águas Brancas, Ananindeua/PA · CNPJ: 51.579.053.0001/40 · Tel.: ${CFG.fone}</span></div>
 <h1>CERTIFICADO DA IGREJA</h1><div style="color:#7a0f1f;font-size:20px;letter-spacing:2px">AUTORIZAÇÃO ESPECIAL</div><br>
 <p>PELO PRESENTE INSTRUMENTO PARTICULAR DE AUTORIZAÇÃO ESPECIAL DE PASTOR(A), A COMIEP – CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ, NESTE ATO REPRESENTADA LEGALMENTE PELO PASTOR QUE SUBSCREVE, CREDENCIA E AUTORIZA O PASTOR <b>${N}</b> A DAR PROSSEGUIMENTO, NA QUALIDADE DE <b>PASTOR-PRESIDENTE</b>, AOS TRABALHOS E ATIVIDADES MINISTERIAIS DA: <b>${I}</b>, COM SEDE ESTABELECIDA NA <u><b>${E}, ${C.toUpperCase()}</b></u>, REALIZANDO REGULARMENTE SEUS CULTOS E ATIVIDADES RELIGIOSAS. A PRESENTE AUTORIZAÇÃO É CONCEDIDA PARA O EXERCÍCIO DAS ATIVIDADES INERENTES À FUNÇÃO PASTORAL E MINISTERIAL, OBSERVADOS OS PRINCÍPIOS, NORMAS E FINALIDADES INSTITUCIONAIS DA COMIEP, BEM COMO OS DIREITOS E GARANTIAS PREVISTOS NO <b>ART. 5º, INCISOS VI E XVI</b>, DA CONSTITUIÇÃO FEDERAL DE 1988, NO QUE COUBER.</p>
 <p>EM FÉ DA VERDADE E PARA QUE PRODUZA OS DEVIDOS EFEITOS PERANTE QUEM DE DIREITO, FIRMA-SE O PRESENTE DOCUMENTO, CONFERINDO AO PASTOR ACIMA IDENTIFICADO LEGITIMIDADE PARA O DESEMPENHO DE SUAS ATRIBUIÇÕES PASTORAIS E ECLESIÁSTICAS.</p>
