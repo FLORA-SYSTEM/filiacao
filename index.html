@@ -26,8 +26,14 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--mu)
 .scroll,.dw{overflow-x:auto}.dw{margin:0 0 20px;padding-bottom:6px}
 #docs:empty{display:none}
 .ficha td:first-child{color:var(--mu);width:140px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}.stats div{background:var(--sf);border:1px solid var(--bd);border-bottom:3px solid var(--gd);border-radius:12px;padding:14px;text-align:center;box-shadow:0 4px 14px rgba(60,20,20,.06)}.stats b{display:block;font:700 1.9rem Georgia,serif;color:var(--rd)}.stats span{font-size:.7rem;text-transform:uppercase;letter-spacing:.9px;color:var(--mu)}
+tbody tr:hover{background:var(--bg)}
+.doc>.wm{position:absolute!important;z-index:-1!important;left:50%;top:50%;transform:translate(-50%,-50%);opacity:.06;pointer-events:none}
+.doc>.prot,.doc>.auth{position:absolute!important;font:10.5px Arial;color:#555;z-index:2}
+.termo>.prot{top:22px;left:60px}.cert>.prot{top:30px;left:70px}.termo>.auth{left:60px;bottom:58px}.cert>.auth{left:0;right:0;bottom:20px;text-align:center}
+.orn{display:flex;align-items:center;gap:12px;color:#c9a227;margin:6px 0 2px}.orn:before,.orn:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,#c9a227,transparent)}
 /* documentos (tamanho A4 em px) */
-.doc{background:#fff;color:#111;position:relative;overflow:hidden;margin:0 auto;box-shadow:0 4px 18px rgba(0,0,0,.25);font:14px/1.5 Arial,sans-serif;text-align:justify}
+.doc{isolation:isolate;background:#fff;color:#111;position:relative;overflow:hidden;margin:0 auto;box-shadow:0 4px 18px rgba(0,0,0,.25);font:14px/1.5 Arial,sans-serif;text-align:justify}
 .termo{width:794px;height:1123px;padding:44px 60px}
 .termo:before{content:"";position:absolute;top:-130px;right:-130px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,#b01c26 0 58%,#e8b923 59% 68%,transparent 69%)}
 .termo .t{text-align:center;font-weight:700}
@@ -36,7 +42,7 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--mu)
 .termo p{margin:0 0 9px}.termo ul{margin:0 0 9px}
 .rod{position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(100deg,#e8b923 0 68%,#b01c26 68.2%);color:#111;font:italic 800 13px Arial;padding:15px 24px}
 .sig{display:flex;gap:30px;position:absolute;left:60px;right:60px;bottom:100px;text-align:center;font:700 12px Arial}.sig div{flex:1;border-top:2px solid #111;padding-top:4px}
-.cert{width:1123px;height:794px;padding:34px 100px;text-align:center;background:radial-gradient(circle at 50% 45%,#fffef9,#f5ebd0);border:6px solid #c9a227;box-shadow:inset 0 0 0 10px #fffdf5,inset 0 0 0 13px #7a0f1f}
+.cert{width:1123px;height:794px;padding:28px 100px;text-align:center;background:radial-gradient(circle at 50% 45%,#fffef9,#f5ebd0);border:6px solid #c9a227;box-shadow:inset 0 0 0 10px #fffdf5,inset 0 0 0 13px #7a0f1f}
 .cert:before,.cert:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#5a0a16 0 60%,#c9a227 61% 67%,transparent 68%)}
 .cert:before{left:-150px;bottom:-150px}.cert:after{right:-150px;top:-150px}
 .cert>*{position:relative;z-index:1}
@@ -47,11 +53,12 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--mu)
 .cert .dt{position:absolute;right:140px;bottom:150px;font:14px Arial;z-index:1}
 .sg{font:italic 30px "Brush Script MT","Segoe Script","Snell Roundhand",cursive;margin-bottom:-2px}
 .selo{position:absolute;right:52px;bottom:42px;width:104px;height:104px;border-radius:50%;background:radial-gradient(circle,#f3d76f,#b8891a);border:4px double #7a5a10;display:flex;align-items:center;justify-content:center;font:800 15px Arial;color:#4d0812;z-index:1}
-@media print{header,footer,.card,.noprint{display:none!important}body{background:#fff}.dw{overflow:visible;margin:0;padding:0}.doc{box-shadow:none;margin:0;break-after:page}.termo{page:termo}.cert{page:cert}@page termo{size:A4 portrait;margin:0}@page cert{size:A4 landscape;margin:0}}
+@media print{header,footer,.card,.stats,.noprint{display:none!important}body{background:#fff}.dw{overflow:visible;margin:0;padding:0}.doc{box-shadow:none;margin:0;break-after:page}.termo{page:termo}.cert{page:cert}@page termo{size:A4 portrait;margin:0}@page cert{size:A4 landscape;margin:0}}
 </style></head><body>
 <header><span id="lg"></span><div><h1>COMIEP</h1><small>Convenção de Ministros e Igrejas Evangélicas do Pará<br>CNPJ 51.579.053.0001/40 · Sistema de Filiação</small></div></header>
 <main>
-<section class="card"><h3>Cadastro de filiação</h3>
+<div class="stats"><div><b id="s1">0</b><span>Filiados</span></div><div><b id="s2">0</b><span>Igrejas filiadas</span></div><div><b id="s3">0</b><span>Ministros</span></div></div>
+<section class="card"><h3>Novo cadastro de filiação</h3>
 <label>Nome completo</label><input id="nome">
 <div class="row"><div><label>Cargo</label><select id="cargo"><option>Pastor Presidente</option><option>Pastor</option><option>Evangelista</option><option>Missionário(a)</option><option>Presbítero</option><option>Diácono</option><option>Obreiro(a)</option></select></div>
 <div><label>Data de consagração</label><input id="cons" type="date"></div></div>
@@ -66,7 +73,7 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.8px;color:var(--mu)
 <button id="wa" class="sec">Enviar pelo WhatsApp</button><button id="pr" class="sec">Imprimir / Salvar documentos em PDF</button></section>
 <div id="docs"></div>
 
-<section class="card"><h3>Filiados cadastrados</h3><div class="scroll"><table><thead><tr><th>Reg.</th><th>Nome</th><th>Cargo</th><th>Igreja</th><th>Válido até</th><th></th></tr></thead><tbody id="lista"><tr><td colspan="6" class="hint">Nenhum cadastro ainda.</td></tr></tbody></table></div><p class="hint" id="dbst"></p></section>
+<section class="card"><h3>Filiados cadastrados</h3><input id="q" placeholder="Buscar por nome, igreja ou cargo…" style="margin:12px 0 8px"><div class="scroll"><table><thead><tr><th>Reg.</th><th>Nome</th><th>Cargo</th><th>Igreja</th><th>Válido até</th><th></th></tr></thead><tbody id="lista"><tr><td colspan="6" class="hint">Nenhum cadastro ainda.</td></tr></tbody></table></div><p class="hint" id="dbst"></p></section>
 </main>
 <footer>COMIEP · Rua Cândido de Souza, nº 56 – Águas Brancas, Ananindeua/PA · (91) 98228-7990</footer>
 <script>
@@ -85,6 +92,7 @@ if(db){col=db.collection("membros");col.onSnapshot(s=>{membros=s.docs.map(d=>d.d
 else $("dbst").textContent="Banco de dados indisponível neste acesso: os cadastros ficam só nesta sessão."})();
 
 function render(){const b=$("lista");if(!membros.length)return;membros.sort((a,b)=>a.registro-b.registro);
+$("s1").textContent=membros.length;$("s2").textContent=membros.filter(x=>x.cargo==="Pastor Presidente").length;$("s3").textContent=membros.filter(x=>x.cargo!=="Pastor Presidente").length;setTimeout(()=>$("q").oninput&&$("q").oninput(),0);
 b.innerHTML=membros.map((m,i)=>`<tr><td>${m.registro}</td><td>${esc(m.nome)}</td><td>${esc(m.cargo)}</td><td>${esc(m.igreja)}</td><td>${m.validade}</td><td><button class="sec" data-i="${i}">Abrir</button></td></tr>`).join("");
 b.querySelectorAll("button").forEach(x=>x.onclick=()=>{mostrar(membros[x.dataset.i]);$("out").scrollIntoView()})}
 
@@ -101,13 +109,15 @@ $("ficha").innerHTML=[["Registro",m.registro],["Nome",m.nome],["Cargo",m.cargo],
 $("wa").onclick=()=>{const m=atual,t=`COMIEP – Cadastro de filiação\nRegistro: ${m.registro}\nNome: ${m.nome}\nCargo: ${m.cargo}\nIgreja: ${m.igreja}\nConsagração: ${fmt(m.consagracao)}\nVálido até: ${m.validade}`;
 window.open("https://wa.me/"+(m.zap?"55"+m.zap:"")+"?text="+encodeURIComponent(t),"_blank")};
 $("pr").onclick=()=>window.print();
+$("q").oninput=()=>{const v=$("q").value.toLowerCase();document.querySelectorAll("#lista tr").forEach(r=>r.style.display=r.textContent.toLowerCase().includes(v)?"":"none")};
 
 function docs(m){const d=$("docs");if(m.cargo!=="Pastor Presidente"){d.innerHTML="";$("pr").style.display="none";return}
 $("pr").style.display="";const h=new Date(),ms=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
 const dt=`${h.getDate()} de ${ms[h.getMonth()]} de ${h.getFullYear()}`;
+const P="Protocolo nº "+String(m.registro).padStart(4,"0")+"/"+new Date(m.criadoEm||Date.now()).getFullYear(),A="COMIEP-"+[...(m.nome+m.registro+m.igreja)].reduce((h,c)=>(h*31+c.charCodeAt(0))>>>0,7).toString(36).toUpperCase(),WM=CREST.replace('width="58" height="64"','width="420" height="462"');
 const N=esc(m.nome).toUpperCase(),I=esc(m.igreja).toUpperCase(),E=esc(m.endereco).toUpperCase(),C=esc(m.cidade);
 const cultos=m.cultos.split(";").filter(s=>s.trim()).map(s=>`<li>${esc(s.trim())}</li>`).join("");
-d.innerHTML=`<div class="dw"><div class="doc termo"><div style="text-align:center">${CREST.replace('width="58" height="64"','width="92" height="101"')}</div>
+d.innerHTML=`<div class="dw"><div class="doc termo"><div class="wm">${WM}</div><div class="prot">${P}</div><div style="text-align:center">${CREST.replace('width="58" height="64"','width="92" height="101"')}</div>
 <div class="t" style="font-size:17px;font-style:italic">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ<br><u>CNPJ: 51.579.053.0001/40</u></div><hr>
 <h2>TERMO DE FILIAÇÃO ECLESIÁSTICA</h2><div class="t" style="font-size:13px;margin-bottom:22px">À CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO ESTADO DO PARÁ – COMIEP</div>
 <p>Pelo presente instrumento, eu, <b>Pr.(a) ${N}</b>, na qualidade de Pastor(a) Presidente da <u>${I}</u>, <b>${E}, ${C.toUpperCase()}</b>, venho, por livre e espontânea vontade, requerer a filiação desta Igreja à Convenção de Ministros e Igrejas Evangélicas do Estado do Pará – <b>COMIEP</b>, reconhecendo-a como sua Convenção Eclesiástica.</p>
@@ -117,14 +127,14 @@ d.innerHTML=`<div class="dw"><div class="doc termo"><div style="text-align:cente
 <p>Declaro que as informações constantes neste documento são verdadeiras, responsabilizando-me por sua autenticidade, requerendo que, após a análise e aprovação pelos órgãos competentes da COMIEP, seja deferida a filiação desta Igreja, produzindo todos os efeitos eclesiásticos e estatutários pertinentes.</p>
 <p>Por ser a expressão da verdade, firmo o presente Termo de Filiação Eclesiástica.</p><p style="text-align:right;margin-top:18px">${C}, ${dt}.</p>
 <div class="sig"><div>PRESIDENTE - COMIEP</div><div>PRESIDENTE - IGREJA</div><div>SECRETÁRIO (A)</div></div>
-<div class="rod">RUA CÂNDIDA DE SOUZA Nº 56 – ÁGUAS BRANCAS ANANINDEUA – PA</div></div></div>
-<div class="dw"><div class="doc cert">${CREST.replace('width="58" height="64"','width="84" height="92"')}
+<div class="auth">Código de autenticidade: ${A}</div><div class="rod">RUA CÂNDIDA DE SOUZA Nº 56 – ÁGUAS BRANCAS ANANINDEUA – PA</div></div></div>
+<div class="dw"><div class="doc cert"><div class="wm">${WM}</div><div class="prot">${P}</div>${CREST.replace('width="58" height="64"','width="84" height="92"')}
 <div class="org">CONVENÇÃO DE MINISTROS E IGREJAS EVANGÉLICAS DO PARÁ</div><div class="end">Rua Cândido de Souza, nº 56 – Bairro Águas Brancas, Ananindeua/PA<br>CNPJ: 51.579.053.0001/40 | Tel.: ${CFG.fone}</div>
-<h1>CERTIFICADO DA IGREJA</h1><div class="sub">AUTORIZAÇÃO ESPECIAL</div>
+<div class="orn">◆</div><h1>CERTIFICADO DA IGREJA</h1><div class="sub">AUTORIZAÇÃO ESPECIAL</div>
 <p>Pelo presente instrumento particular de autorização especial de Pastor(a), a COMIEP – Convenção de Ministros e Igrejas Evangélicas do Pará, neste ato representada legalmente pelo pastor que subscreve, credencia e autoriza o pastor <b style="color:#6b1020">${N}</b> a dar prosseguimento, na qualidade de <b style="color:#6b1020">Pastor-Presidente</b>, aos trabalhos e atividades ministeriais da: <b style="color:#6b1020">${I}</b>, com sede estabelecida na <u><b>${E}, ${C.toUpperCase()}</b></u>, realizando regularmente seus cultos e atividades religiosas. A presente autorização é concedida para o exercício das atividades inerentes à função pastoral e ministerial, observados os princípios, normas e finalidades institucionais da COMIEP, bem como os direitos e garantias previstos no <b>Art. 5º, incisos VI e XVI</b>, da Constituição Federal de 1988, no que couber.</p>
 <p>Em fé da verdade e para que produza os devidos efeitos perante quem de direito, firma-se o presente documento, conferindo ao pastor acima identificado legitimidade para o desempenho de suas atribuições pastorais e eclesiásticas.</p>
 <p>Por essa razão, solicita-se às autoridades civis, militares e eclesiásticas, bem como às instituições e particulares, que reconheçam a presente autorização e concedam ao seu portador o apoio, respeito e auxílio necessários e adequados para o desempenho de sua missão pastoral.</p>
 <div class="dt">Ananindeua/PA, ${dt}.</div>
 <div class="sig"><div><div class="sg">${esc(CFG.presidente)}</div>PRESIDENTE DA COMIEP</div><div><div class="sg">${esc(CFG.secretaria)}</div>SECRETÁRIO (A) DA COMIEP</div><div><div class="sg">${esc(m.nome.split(" ").slice(0,2).join(" "))}</div>PRESIDENTE DO MINISTÉRIO</div></div>
-<div class="selo">COMIEP</div></div></div>`}
+<div class="auth">Código de autenticidade: ${A} · Documento emitido pelo sistema COMIEP</div><div class="selo">COMIEP</div></div></div>`}
 </script></body></html>
